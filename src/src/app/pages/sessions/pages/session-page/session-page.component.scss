@@ -1,0 +1,98 @@
+.panel {
+  margin: 1rem;
+}
+.available-cards {
+  display: flex;
+  flex-flow: row;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  .card-container {
+    .card {
+      font-size: 1rem;
+      padding: 1rem 0rem;
+      width: 2rem;
+      text-align: center;
+      border-radius: 1rem;
+      border: 2px solid #555;
+      span {
+        padding: 0;
+      }
+    }
+    .card:hover {
+      border: 2px solid #fff;
+    }
+  }
+}
+
+.participants-list {
+  display: flex;
+  flex-flow: row;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  .participant {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+    background-color: #222;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 2px solid #555;
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.poker-toolbar {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 768px) {
+  .available-cards {
+    .card-container {
+      .card {
+        font-size: 1rem;
+        padding: 2rem 0rem;
+        width: 4.5rem;
+        span {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .available-cards {
+    .card-container {
+      .card {
+        font-size: 1.5rem;
+        padding: 3rem 0rem;
+        width: 6rem;
+        span {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+@media only screen and (min-width: 1600px) {
+  .available-cards {
+    .card-container {
+      .card {
+        font-size: 2rem;
+        padding: 4rem 0rem;
+        width: 8rem;
+        span {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

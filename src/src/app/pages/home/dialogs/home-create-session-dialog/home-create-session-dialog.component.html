@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Create a session</h2>
+<mat-dialog-content>
+  This will create a new session on the server. You and your team mates can join
+  this session immediately or at a later (scheduled) stage.
+  <br /><br />
+  <form [formGroup]="createSessionForm" no-validate>
+    <mat-form-field>
+      <mat-label>Your name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="createSessionForm.value"
+    [disabled]="!createSessionForm.valid"
+  >
+    Create
+  </button>
+</mat-dialog-actions>

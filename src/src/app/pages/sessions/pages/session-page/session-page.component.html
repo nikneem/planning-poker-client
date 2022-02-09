@@ -1,0 +1,63 @@
+<mat-toolbar>
+  <span>Poker session {{ sessionCode }}: {{ username }}</span>
+</mat-toolbar>
+<div class="panel">
+  <mat-card>
+    <mat-card-title>Pick a card</mat-card-title>
+    <mat-card-content>
+      <div class="available-cards">
+        <div class="card-container" *ngFor="let votable of votables">
+          <button
+            class="card"
+            color="primary"
+            mat-flat-button
+            [disabled]="!voting"
+            (click)="castVote(votable)"
+          >
+            {{ votable }}
+          </button>
+        </div>
+      </div></mat-card-content
+    >
+  </mat-card>
+</div>
+<div class="panel">
+  <mat-card>
+    <mat-card-title>Participants</mat-card-title
+    ><mat-card-content>
+      <div class="participants-list" *ngIf="participants">
+        <div class="participant" *ngFor="let participant of participants">
+          <p>{{ participant.name }}</p>
+          <p
+            *ngIf="
+              !voting ||
+              (participant.userId == userId && participant.currentVote)
+            "
+          >
+            {{ participant.currentVote }}
+          </p>
+          <p
+            *ngIf="
+              voting &&
+              (participant.userId != userId || !participant.currentVote)
+            "
+          >
+            -
+          </p>
+        </div>
+      </div></mat-card-content
+    >
+  </mat-card>
+</div>
+<div class="panel">
+  <mat-card>
+    <mat-card-title>Tools</mat-card-title>
+    <mat-card-actions>
+      <div class="poker-toolbar">
+        <button mat-flat-button color="accent" (click)="reset()">
+          Reset all votes
+        </button>
+      </div></mat-card-actions
+    >
+  </mat-card>
+</div>

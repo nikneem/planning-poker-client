@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Join a session</h2>
+<mat-dialog-content>
+  This will join an existing session. Type the unique code for a session and
+  join in... The more, the merrier ;)
+  <br /><br />
+  <form [formGroup]="joinSessionForm" no-validate>
+    <mat-form-field>
+      <mat-label>Session code</mat-label>
+      <input matInput formControlName="code" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Your name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="joinSessionForm.value"
+    [disabled]="!joinSessionForm.valid"
+  >
+    Join
+  </button>
+</mat-dialog-actions>

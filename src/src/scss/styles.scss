@@ -1,0 +1,41 @@
+html,
+body {
+  background-color: #333;
+  color: #ccc;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Work Sans", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+}
+
+form {
+  .mat-form-field {
+    width: 100%;
+  }
+  .mat-slider {
+    width: 100%;
+  }
+  .half-width {
+    width: 50%;
+  }
+  .auto-width {
+    width: auto;
+  }
+}
+
+.mat-dialog-container {
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }
+}
