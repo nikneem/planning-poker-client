@@ -5,7 +5,6 @@ import {
   SessionDetailsDto,
   SessionJoinDto,
   SessionJoinGroupDto,
-  SessionParticipantDto,
   SessionParticipantVoteDto,
 } from './session.models';
 

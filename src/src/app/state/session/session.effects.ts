@@ -66,24 +66,4 @@ export class SessionEffects {
       )
     )
   );
-
-  sessionJoinGroup$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(sessionJoinGroup),
-      mergeMap((action) =>
-        this.sessionsService.joinGroup(action.code, action.payload).pipe(
-          map((payload) => {
-            return sessionCreateFailed({ errorMessage: 'blah' });
-          }),
-          catchError((err) => {
-            return of(
-              sessionCreateFailed({
-                errorMessage: 'Failure',
-              })
-            );
-          })
-        )
-      )
-    )
-  );
 }

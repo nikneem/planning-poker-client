@@ -27,26 +27,4 @@ export class SessionsService {
     let url = `${this.backendUrl}/api/session/${dto.code}`;
     return this.http.post<SessionDetailsDto>(url, dto);
   }
-  public reset(code: string): Observable<SessionDetailsDto> {
-    let url = `${this.backendUrl}/api/session/${code}/reset`;
-    return this.http.get<SessionDetailsDto>(url);
-  }
-  public joinGroup(
-    code: string,
-    payload: SessionJoinGroupDto
-  ): Observable<boolean> {
-    let url = `${this.backendUrl}/api/session/${code}/join`;
-    return this.http.post<boolean>(url, payload);
-  }
-  public ping(code: string): Observable<boolean> {
-    let url = `${this.backendUrl}/api/session/${code}/ping`;
-    return this.http.get<boolean>(url);
-  }
-  public vote(
-    code: string,
-    payload: SessionParticipantVoteDto
-  ): Observable<boolean> {
-    let url = `${this.backendUrl}/api/session/${code}/vote`;
-    return this.http.post<boolean>(url, payload);
-  }
 }
