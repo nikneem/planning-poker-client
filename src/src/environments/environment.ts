@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'http://localhost:7071',
+  backendUrl: 'https://planningpokerserverless.azurewebsites.net/',
 };
 
 /*
