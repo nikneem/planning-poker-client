@@ -7,6 +7,7 @@ import { AppState } from 'src/app/state/app.state';
 import {
   sessionAddParticipant,
   sessionParticipantVote,
+  sessionRemoveParticipant,
   sessionReset,
 } from 'src/app/state/session/session.actions';
 import {
@@ -151,6 +152,11 @@ export class SessionPageComponent implements OnInit, OnDestroy {
           let eventData = data.data as ISessionJoinedEvent;
           this.store.dispatch(sessionAddParticipant({ payload: eventData }));
         }
+        if (data.data.event === 'leave') {
+          this.store.dispatch(
+            sessionRemoveParticipant({ userId: data.data.userId })
+          );
+        }
         if (data.data.event === 'vote') {
           let eventData = new SessionParticipantVoteDto(
             data.data.userId,
@@ -171,6 +177,28 @@ export class SessionPageComponent implements OnInit, OnDestroy {
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
     if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
+      debugger;
+      this.websocket?.send(
+        JSON.stringify({
+          type: 'sendToGroup',
+          group: this.sessionCode,
+          noEcho: false,
+          dataType: 'json',
+          data: {
+            event: 'leave',
+            session: this.sessionCode,
+            userId: this.userId,
+          },
+        })
+      );
+      this.websocket?.send(
+        JSON.stringify({
+          type: 'leaveGroup',
+          group: this.sessionCode,
+          ackId: 1,
+        })
+      );
+
       this.websocket.close();
     }
   }

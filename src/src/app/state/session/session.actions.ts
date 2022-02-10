@@ -53,6 +53,10 @@ export const sessionAddParticipant = createAction(
   '[Session] AddParticipant',
   props<{ payload: ISessionJoinedEvent }>()
 );
+export const sessionRemoveParticipant = createAction(
+  '[Session] RemoveParticipant',
+  props<{ userId: string }>()
+);
 
 export const sessionParticipantVote = createAction(
   '[Session] ParticipantVote',

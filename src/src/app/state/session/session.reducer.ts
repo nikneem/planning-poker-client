@@ -4,6 +4,7 @@ import {
   sessionAddParticipant,
   sessionCreateOk,
   sessionParticipantVote,
+  sessionRemoveParticipant,
   sessionReset,
 } from './session.actions';
 import {
@@ -26,6 +27,9 @@ const _sessionReducer = createReducer(
   ),
   on(sessionParticipantVote, (state, { payload }) =>
     handleSessionParticipantVote(state, payload)
+  ),
+  on(sessionRemoveParticipant, (state, { userId }) =>
+    handleSessionRemoveParticipant(state, userId)
   ),
   on(sessionReset, (state) => resetAllParticipants(state))
 );
@@ -79,6 +83,23 @@ function handleSessionParticipantVote(
     );
     newParticipant.currentVote = participant.vote;
     occupations.splice(position, 1, newParticipant);
+  }
+  copyState.participants = occupations;
+  return copyState;
+}
+
+function handleSessionRemoveParticipant(
+  state: SessionState,
+  userId: string
+): SessionState {
+  const copyState: SessionState = Object.assign({}, state);
+  let occupations = copyState.participants
+    ? new Array<SessionParticipantDto>(...copyState.participants)
+    : new Array<SessionParticipantDto>();
+  let existingParticipant = occupations.find((p) => p.userId === userId);
+  if (existingParticipant) {
+    let position = occupations.indexOf(existingParticipant);
+    occupations.splice(position, 1);
   }
   copyState.participants = occupations;
   return copyState;
