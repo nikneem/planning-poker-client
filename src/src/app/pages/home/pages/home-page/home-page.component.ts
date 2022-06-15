@@ -6,10 +6,7 @@ import {
   sessionCreate,
   sessionJoin,
 } from 'src/app/state/session/session.actions';
-import {
-  SessionCreateDto,
-  SessionJoinDto,
-} from 'src/app/state/session/session.models';
+import { SessionCreateDto } from 'src/app/state/session/session.models';
 import { HomeCreateSessionDialogComponent } from '../../dialogs/home-create-session-dialog/home-create-session-dialog.component';
 import { HomeJoinSessionDialogComponent } from '../../dialogs/home-join-session-dialog/home-join-session-dialog.component';
 
@@ -41,7 +38,7 @@ export class HomePageComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        let payload = new SessionJoinDto(result);
+        let payload = new SessionCreateDto(result);
         if (payload.name) {
           localStorage.setItem('name', payload.name);
         }

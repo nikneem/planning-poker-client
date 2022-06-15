@@ -36,6 +36,7 @@ export class SessionPageComponent implements OnInit, OnDestroy {
   public currentVote?: number;
   public state: string = 'normal';
   public voting: boolean = true;
+  public isOwner: boolean = false;
 
   constructor(private store: Store<AppState>, private router: Router) {}
 
@@ -88,7 +89,7 @@ export class SessionPageComponent implements OnInit, OnDestroy {
         JSON.stringify({
           type: 'sendToGroup',
           group: this.sessionCode,
-          noEcho: false,
+          noEcho: true,
           dataType: 'json',
           data: {
             event: 'joined',
@@ -148,9 +149,20 @@ export class SessionPageComponent implements OnInit, OnDestroy {
   handleRealTimeMessage(data: ISessionEvent) {
     if (data.type === 'message') {
       if (data.from === 'group' && data.group === this.sessionCode) {
+        console.log(data.data.event);
         if (data.data.event === 'joined') {
           let eventData = data.data as ISessionJoinedEvent;
-          this.store.dispatch(sessionAddParticipant({ payload: eventData }));
+          let broadcast = true;
+          if (this.participants) {
+            let existingParticipant = this.participants.find(
+              (p) => p.userId === data.data.userId
+            );
+            broadcast =
+              existingParticipant === null || existingParticipant === undefined;
+          }
+          if (broadcast) {
+            this.store.dispatch(sessionAddParticipant({ payload: eventData }));
+          }
         }
         if (data.data.event === 'leave') {
           this.store.dispatch(
@@ -177,7 +189,6 @@ export class SessionPageComponent implements OnInit, OnDestroy {
   @HostListener('window:beforeunload', ['$event'])
   unloadHandler(event: Event) {
     if (this.websocket && this.websocket.readyState === WebSocket.OPEN) {
-      debugger;
       this.websocket?.send(
         JSON.stringify({
           type: 'sendToGroup',
@@ -215,6 +226,7 @@ export class SessionPageComponent implements OnInit, OnDestroy {
         this.webPubSubUrl = val.connectionUrl;
         this.userId = val.userId;
         this.username = val.username;
+        this.isOwner = val.isOwner;
         if (this.sessionCode) {
           this.connect();
         } else {

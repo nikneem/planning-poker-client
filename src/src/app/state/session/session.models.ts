@@ -1,16 +1,8 @@
 export class SessionCreateDto {
   name?: string;
+  code?: string;
 
   constructor(init?: Partial<SessionCreateDto>) {
-    Object.assign(this, init);
-  }
-}
-
-export class SessionJoinDto {
-  code?: string;
-  name?: string;
-
-  constructor(init?: Partial<SessionJoinDto>) {
     Object.assign(this, init);
   }
 }
@@ -20,6 +12,7 @@ export class SessionDetailsDto {
   connectionUrl?: string;
   userId?: string;
   username?: string;
+  owningCode?: string;
 
   constructor(init?: Partial<SessionCreateDto>) {
     Object.assign(this, init);

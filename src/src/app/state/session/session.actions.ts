@@ -3,8 +3,6 @@ import { ISessionJoinedEvent } from 'src/app/pages/sessions/models/session.model
 import {
   SessionCreateDto,
   SessionDetailsDto,
-  SessionJoinDto,
-  SessionJoinGroupDto,
   SessionParticipantVoteDto,
 } from './session.models';
 
@@ -23,7 +21,7 @@ export const sessionCreateFailed = createAction(
 
 export const sessionJoin = createAction(
   '[Session] Join',
-  props<{ dto: SessionJoinDto }>()
+  props<{ dto: SessionCreateDto }>()
 );
 export const sessionJoinOk = createAction(
   '[Session] Join OK',
@@ -46,7 +44,7 @@ export const sessionResetFailed = createAction(
 
 export const sessionJoinGroup = createAction(
   '[Session] JoinGroup',
-  props<{ code: string; payload: SessionJoinGroupDto }>()
+  props<{ code: string; payload: SessionCreateDto }>()
 );
 
 export const sessionAddParticipant = createAction(
