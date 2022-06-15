@@ -21,6 +21,7 @@ const _sessionReducer = createReducer(
     connectionUrl: dto.connectionUrl,
     userId: dto.userId,
     username: dto.username,
+    isOwner: dto.code === dto.owningCode,
   })),
   on(sessionAddParticipant, (state, { payload }) =>
     addSessionParticipant(state, payload)

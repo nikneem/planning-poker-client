@@ -5,9 +5,6 @@ import { environment } from 'src/environments/environment';
 import {
   SessionCreateDto,
   SessionDetailsDto,
-  SessionJoinDto,
-  SessionJoinGroupDto,
-  SessionParticipantVoteDto,
 } from '../state/session/session.models';
 
 @Injectable({
@@ -21,10 +18,6 @@ export class SessionsService {
 
   public create(dto: SessionCreateDto): Observable<SessionDetailsDto> {
     let url = `${this.backendUrl}/api/session`;
-    return this.http.post<SessionDetailsDto>(url, dto);
-  }
-  public join(dto: SessionJoinDto): Observable<SessionDetailsDto> {
-    let url = `${this.backendUrl}/api/session/${dto.code}`;
     return this.http.post<SessionDetailsDto>(url, dto);
   }
 }

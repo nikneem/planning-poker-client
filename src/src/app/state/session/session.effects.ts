@@ -48,7 +48,7 @@ export class SessionEffects {
     this.actions$.pipe(
       ofType(sessionJoin),
       mergeMap((action) =>
-        this.sessionsService.join(action.dto).pipe(
+        this.sessionsService.create(action.dto).pipe(
           map((payload) => {
             return sessionCreateOk({ dto: payload });
           }),

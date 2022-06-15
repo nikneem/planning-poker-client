@@ -6,8 +6,10 @@ export interface SessionState {
   userId?: string;
   username?: string;
   participants: Array<SessionParticipantDto>;
+  isOwner: boolean;
 }
 
 export const INITIAL_SESSION_STATE: SessionState = {
   participants: new Array<SessionParticipantDto>(),
+  isOwner: false,
 };
